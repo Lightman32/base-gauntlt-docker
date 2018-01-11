@@ -1,6 +1,7 @@
 FROM ubuntu:16.04
 ENV DIRB_WORDLISTS /opt/dirb/wordlists
 ENV SSLYZE_PATH /usr/local/bin/sslyze
+ENV PATH="/arachni/bin:${PATH}"
 
 # Install Dependencies
 RUN \
@@ -54,6 +55,13 @@ RUN \
   make && \
   ln -s `pwd`/dirb /usr/local/bin/dirb
 
+# Install Arachni tools
+Run \
+ wget -q https://github.com/Arachni/arachni/releases/download/v1.5.1/arachni-1.5.1-0.5.12-linux-x86_64.tar.gz && \
+ tar -xzf arachni-1.5.1-0.5.12-linux-x86_64.tar.gz && \
+ rm -rf arachni-1.5.1-0.5.12-linux-x86_64.tar.gz && \
+ mv arachni-* arachni
+ 
 # Install Garmr
 RUN \
   cd /opt && \
@@ -63,6 +71,3 @@ RUN \
 
 # Install Gauntlt
 RUN gem install gauntlt --no-rdoc --no-ri
-
-# Install Attack tools
-RUN gem install arachni -v 1.5.1 --no-rdoc --no-ri
