@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 ENV DIRB_WORDLISTS /opt/dirb/wordlists
 ENV SSLYZE_PATH /usr/local/bin/sslyze
 ENV PATH="/arachni/bin:${PATH}"
@@ -7,26 +7,26 @@ ENV PATH="/arachni/bin:${PATH}"
 RUN \
   apt-get update && \
   apt-get install -y --no-install-recommends \
-    build-essential \
-    ca-certificates \
+  build-essential \
+  ca-certificates \
 	git \
-    curl \
-    libcurl3 \
-    libcurl4-openssl-dev \
-    wget \
-    zlib1g-dev \
-    libxml2-dev \
-    libxslt1-dev \
-    ruby \
-    ruby-dev \
-    ruby-bundler \
+  curl \
+  libcurl4 \
+  libcurl4-openssl-dev \
+  wget \
+  zlib1g-dev \
+  libxml2-dev \
+  libxslt1-dev \
+  ruby \
+  ruby-dev \
+  ruby-bundler \
 	chrpath libssl-dev libxft-dev \
 	libfreetype6 libfreetype6-dev \
 	libfontconfig1 libfontconfig1-dev \
-	python python-dev python-pip python-software-properties \
-    nmap \
+	python2.7 python2.7-dev python-pip python-setuptools \
+  nmap \
 	sqlmap && \
-    rm -rf /var/lib/apt/lists/*
+  rm -rf /var/lib/apt/lists/*
 
 # Install PhantomJs
 RUN mkdir /tmp/phantomjs \
@@ -36,8 +36,7 @@ RUN mkdir /tmp/phantomjs \
     && mv bin/phantomjs /usr/local/bin
 
 # Python Dependencies and sslyze
-RUN pip install --upgrade setuptools && \
-	pip install wheel && \
+RUN pip install wheel && \
 	pip install sslyze && \
 	pip install typing && \
 	pip install requests && \
