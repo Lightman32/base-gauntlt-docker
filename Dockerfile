@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 ENV DIRB_WORDLISTS /opt/dirb/wordlists
 ENV SSLYZE_PATH /usr/local/bin/sslyze
 ENV PATH="/arachni/bin:${PATH}"
@@ -11,7 +11,7 @@ RUN \
     ca-certificates \
 	git \
     curl \
-    libcurl3 \
+    libcurl4 \
     libcurl4-openssl-dev \
     wget \
     zlib1g-dev \
@@ -23,7 +23,7 @@ RUN \
 	chrpath libssl-dev libxft-dev \
 	libfreetype6 libfreetype6-dev \
 	libfontconfig1 libfontconfig1-dev \
-	python python-dev python-pip python-software-properties \
+	python2.7 python2.7-dev python-pip python-setuptools \
     nmap \
 	sqlmap && \
     rm -rf /var/lib/apt/lists/*
