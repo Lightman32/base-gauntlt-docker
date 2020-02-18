@@ -68,5 +68,13 @@ RUN \
   cd Garmr && \
   python setup.py install
 
-# Install Gauntlt
-RUN gem install gauntlt --no-rdoc --no-ri
+# Install Gauntlt from source as released version is bit old
+#RUN gem install gauntlt --no-rdoc --no-ri
+
+RUN \
+  git clone git://github.com/gauntlt/gauntlt.git && \
+  cd gauntlt && \
+  bundle && \
+  gem build gauntlt.gemspec && \
+  gem install gauntlt && \
+  rm -rf /gauntlt
