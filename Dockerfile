@@ -54,6 +54,20 @@ RUN \
   make && \
   ln -s `pwd`/dirb /usr/local/bin/dirb
 
+#Install gobuster
+RUN \
+ cd / && \
+ wget -q https://github.com/OJ/gobuster/releases/download/v3.0.1/gobuster-linux-amd64.7z && \
+ apt update && \
+ apt install -y p7zip-full && \
+ 7z x gobuster-linux-amd64.7z && \
+ mkdir /opt/gobuster && \
+ mv /gobuster-linux-amd64/gobuster /opt/gobuster/ && \
+ chmod -R +x /opt/gobuster/ && \
+ rm gobuster-linux-amd64.7z && \
+ rmdir gobuster-linux-amd64 && \
+ ln -s /opt/gobuster/gobuster /usr/local/bin/gobuster
+
 # Install Arachni tools
 Run \
  wget -q https://github.com/Arachni/arachni/releases/download/v1.5.1/arachni-1.5.1-0.5.12-linux-x86_64.tar.gz && \
