@@ -6,7 +6,6 @@ ENV PATH="/arachni/bin:${PATH}"
 # Install Dependencies
 RUN \
   apt-get update && \
-  apt update && \
   apt-get install -y --no-install-recommends \
   build-essential \
   ca-certificates \
@@ -25,9 +24,9 @@ RUN \
 	libfreetype6 libfreetype6-dev \
 	libfontconfig1 libfontconfig1-dev \
 	python2.7 python2.7-dev python-pip python-setuptools \
+  p7zip-full \
   nmap \
 	sqlmap && \
-  apt install -y p7zip-full &&\
   rm -rf /var/lib/apt/lists/*
 
 # Install PhantomJs
