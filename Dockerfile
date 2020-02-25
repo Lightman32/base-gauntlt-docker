@@ -24,6 +24,7 @@ RUN \
 	libfreetype6 libfreetype6-dev \
 	libfontconfig1 libfontconfig1-dev \
 	python2.7 python2.7-dev python-pip python-setuptools \
+  p7zip-full \
   nmap \
 	sqlmap && \
   rm -rf /var/lib/apt/lists/*
@@ -53,6 +54,17 @@ RUN \
   bash ./configure && \
   make && \
   ln -s `pwd`/dirb /usr/local/bin/dirb
+
+#Install gobuster
+RUN \
+ wget -q https://github.com/OJ/gobuster/releases/download/v3.0.1/gobuster-linux-amd64.7z && \
+ 7z x gobuster-linux-amd64.7z && \
+ mkdir /opt/gobuster && \
+ mv /gobuster-linux-amd64/gobuster /opt/gobuster/ && \
+ chmod -R +x /opt/gobuster/ && \
+ rm gobuster-linux-amd64.7z && \
+ rmdir gobuster-linux-amd64 && \
+ ln -s /opt/gobuster/gobuster /usr/local/bin/gobuster
 
 # Install Arachni tools
 Run \
