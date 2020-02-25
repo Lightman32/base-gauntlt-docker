@@ -6,6 +6,7 @@ ENV PATH="/arachni/bin:${PATH}"
 # Install Dependencies
 RUN \
   apt-get update && \
+  apt update && \
   apt-get install -y --no-install-recommends \
   build-essential \
   ca-certificates \
@@ -26,6 +27,7 @@ RUN \
 	python2.7 python2.7-dev python-pip python-setuptools \
   nmap \
 	sqlmap && \
+  apt install -y p7zip-full &&\
   rm -rf /var/lib/apt/lists/*
 
 # Install PhantomJs
@@ -56,10 +58,7 @@ RUN \
 
 #Install gobuster
 RUN \
- cd / && \
  wget -q https://github.com/OJ/gobuster/releases/download/v3.0.1/gobuster-linux-amd64.7z && \
- apt update && \
- apt install -y p7zip-full && \
  7z x gobuster-linux-amd64.7z && \
  mkdir /opt/gobuster && \
  mv /gobuster-linux-amd64/gobuster /opt/gobuster/ && \
